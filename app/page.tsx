@@ -4,7 +4,7 @@ import  Header  from "@/components/Landing/Header";
 import  Hero  from "@/components/Landing/Hero";
 import  HowitWorks  from "@/components/Landing/HowitWorks";
 import { PricingSection } from "@/components/Landing/PricingSection";
-import { WhattoAsk } from "@/components/Landing/WhattoAsk";
+import  WhattoAsk  from "@/components/Landing/WhattoAsk";
 
 
 export default function App() {

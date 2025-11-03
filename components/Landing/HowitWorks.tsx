@@ -159,6 +159,11 @@ export default function HowitWorks() {
           </div>
         </div>
 
+
+        {/* CTA BUTTONS */}
+
+
+
         <div className="text-center mt-16">
           <SignUpButton  mode="modal">
             <Button size={"lg"}>

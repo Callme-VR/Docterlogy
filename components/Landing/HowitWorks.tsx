@@ -159,21 +159,16 @@ export default function HowitWorks() {
           </div>
         </div>
 
-
         {/* CTA BUTTONS */}
 
-
-
         <div className="text-center mt-16">
-          <SignUpButton  mode="modal">
+          <SignUpButton mode="modal">
             <Button size={"lg"}>
               <ArrowRight className="mr-2 size-5" />
               Get Started now
             </Button>
           </SignUpButton>
-
         </div>
-
       </div>
     </section>
   );

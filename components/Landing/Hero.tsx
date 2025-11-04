@@ -24,7 +24,9 @@ export default function Hero() {
                 {/* Badge */}
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/10 to-primary/5 rounded-full border border-primary/20 backdrop-blur-sm animate-fade-in">
                   <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                  <span className="text-sm font-semibold text-primary">AI-Powered Healthcare Assistant</span>
+                  <span className="text-sm font-semibold text-primary">
+                    AI-Powered Healthcare Assistant
+                  </span>
                 </div>
 
                 {/* Main heading with responsive typography */}
@@ -42,21 +44,29 @@ export default function Hero() {
 
                 {/* Description */}
                 <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl font-medium">
-                  Chat with our AI Doctor Assistant for all your health concerns and smart AI-based appointments. 
-                  Available 24/7 to provide reliable medical information and support.
+                  Chat with our AI Doctor Assistant for all your health concerns
+                  and smart AI-based appointments. Available 24/7 to provide
+                  reliable medical information and support.
                 </p>
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 pt-2">
                   <SignUpButton mode="modal">
-                    <Button size={"lg"} className="w-full sm:w-auto transition-transform hover:scale-105">
+                    <Button
+                      size={"lg"}
+                      className="w-full sm:w-auto transition-transform hover:scale-105"
+                    >
                       <MicIcon className="mr-2 size-5" />
                       Try Voice AI Agent
                     </Button>
                   </SignUpButton>
 
                   <SignUpButton mode="modal">
-                    <Button size={"lg"} variant={"outline"} className="w-full sm:w-auto transition-transform hover:scale-105">
+                    <Button
+                      size={"lg"}
+                      variant={"outline"}
+                      className="w-full sm:w-auto transition-transform hover:scale-105"
+                    >
                       <CalendarIcon className="mr-2 size-5" />
                       Book Appointment
                     </Button>
@@ -73,9 +83,12 @@ export default function Hero() {
                         "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&crop=face",
                         "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face",
                         "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=100&h=100&fit=crop&crop=face",
-                        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=100&h=100&fit=crop&crop=face"
+                        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=100&h=100&fit=crop&crop=face",
                       ].map((src, index) => (
-                        <div key={index} className="relative h-10 w-10 sm:h-12 sm:w-12">
+                        <div
+                          key={index}
+                          className="relative h-10 w-10 sm:h-12 sm:w-12"
+                        >
                           <Image
                             src={src}
                             alt={`User ${index + 1}`}
@@ -91,17 +104,21 @@ export default function Hero() {
                       <div className="flex items-center gap-2">
                         <div className="flex">
                           {[1, 2, 3, 4, 5].map((star) => (
-                            <StarIcon 
-                              key={star} 
-                              className="h-4 w-4 sm:h-5 sm:w-5 fill-amber-400 text-amber-400" 
+                            <StarIcon
+                              key={star}
+                              className="h-4 w-4 sm:h-5 sm:w-5 fill-amber-400 text-amber-400"
                             />
                           ))}
                         </div>
-                        <span className="text-sm font-bold text-foreground">4.9/5</span>
+                        <span className="text-sm font-bold text-foreground">
+                          4.9/5
+                        </span>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Trusted by{' '}
-                        <span className="font-semibold text-foreground">1,200+ patients</span>
+                        Trusted by{" "}
+                        <span className="font-semibold text-foreground">
+                          1,200+ patients
+                        </span>
                       </p>
                     </div>
                   </div>
@@ -114,7 +131,7 @@ export default function Hero() {
               {/* Decorative elements */}
               <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl rotate-45 blur-xl opacity-70"></div>
               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-primary/15 to-primary/5 rounded-full blur-2xl opacity-70"></div>
-              
+
               {/* Hero Image */}
               <div className="relative w-full max-w-2xl mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-3xl -rotate-3 -z-10"></div>

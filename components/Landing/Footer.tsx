@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import Image from "next/image";
 
 export default function Footer() {
@@ -87,7 +87,10 @@ export default function Footer() {
         </div>
 
         <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; 2024 DentWise. Built for real people with real dental questions.</p>
+          <p>
+            &copy; 2024 DentWise. Built for real people with real dental
+            questions.
+          </p>
         </div>
       </div>
     </footer>

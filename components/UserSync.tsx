@@ -8,7 +8,7 @@ function UserSync() {
   const { isSignedIn, isLoaded } = useUser();
 
   useEffect(() => {
-    const handleUsersync = async () => {
+    const handleUserSync = async () => {
       if (isLoaded && isSignedIn) {
         try {
           await SyncUser();
@@ -17,7 +17,7 @@ function UserSync() {
         }
       }
     };
-    handleUsersync();
+    handleUserSync();
   },[isLoaded,isSignedIn]);
   return null;
 }

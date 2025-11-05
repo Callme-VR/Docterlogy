@@ -8,7 +8,7 @@ export async function SyncUser() {
     try {
         const user = await currentUser();
 
-        if (!user) return null;
+        if (!user) return;
 
         const existingUser = await prisma.user.findUnique({ where: { clerkId: user.id } });
         if (existingUser) return existingUser;
@@ -27,6 +27,5 @@ export async function SyncUser() {
         
     } catch (error) {
         console.error("Error syncing user:", error);
-        return null;
     }
 }

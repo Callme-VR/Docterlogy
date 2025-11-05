@@ -5,18 +5,16 @@ import Hero from "@/components/Landing/Hero";
 import HowitWorks from "@/components/Landing/HowitWorks";
 import PricingSection from "@/components/Landing/PricingSection";
 import WhattoAsk from "@/components/Landing/WhattoAsk";
+import { SyncUser } from "@/lib/actions/users";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
-export default  async function App() {
-
+export default async function App() {
   // redirect the user to Dashboard page is the user if try to login
+  const user = await currentUser();
+  await SyncUser();
+  if (user) redirect("/dashboard");
   
-  const user=await currentUser();
-  if(user) redirect("/dashboard")
-
-
-
 
   return (
     <div className="min-h-screen bg-background">

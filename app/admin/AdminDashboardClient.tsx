@@ -1,5 +1,8 @@
+/** biome-ignore-all assist/source/organizeImports: <explanation> */
+
 "use client";
 
+import Adminstats from "@/components/admin/Adminstats";
 import Navbar from "@/components/Navbar";
 import { useGetAppointments } from "@/hooks/use-appointments";
 import { useGetDoctors } from "@/hooks/use-doctors";
@@ -13,7 +16,21 @@ export default function AdminDashboardClient() {
   const { data: appointments = [], isLoading: AppointmentsLoading } =
     useGetAppointments();
 
-  console.log({ doctors, appointments });
+    // calculate the States
+    const stats = {
+      totalDoctors: doctors.length,
+      activeDoctors: doctors.filter((doc) => doc.isActive).length,
+      totalAppointments: appointments.length,
+      completedAppointments: appointments.filter((app) => app.status === "CONFIRMED").length,
+    };
+
+
+
+
+
+
+
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -40,6 +57,14 @@ export default function AdminDashboardClient() {
               </p>
             </div>
           </div>
+
+          <Adminstats 
+          totalDoctors={stats.totalDoctors}
+          totalAppointments={stats.totalAppointments}
+          activeDoctors={stats.activeDoctors}
+          completedAppointments={stats.completedAppointments}
+
+          />
 
           <div className="hidden lg:block">
             <div className="w-32 h-32 bg-linear-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center">

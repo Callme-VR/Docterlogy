@@ -15,6 +15,8 @@ export async function getappointments() {
       },
       orderBy: { createdAt: "desc" },
     });
+    
+    return appointments;
   } catch (error) {
     console.log("Error fetching appointments", error);
     throw new Error("Failed to fetch appointments");

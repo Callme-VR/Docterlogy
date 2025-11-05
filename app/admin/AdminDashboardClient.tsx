@@ -1,11 +1,20 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
+import { useGetAppointments } from "@/hooks/use-appointments";
+import { useGetDoctors } from "@/hooks/use-doctors";
 import { useUser } from "@clerk/nextjs";
 import { SettingsIcon } from "lucide-react";
 
 export default function AdminDashboardClient() {
   const { user } = useUser();
+  const { data: doctors = [], isLoading } = useGetDoctors(); /*tanstack hook*/
+
+  const { data: appointments = [], isLoading: AppointmentsLoading } =
+    useGetAppointments();
+
+  console.log({ doctors, appointments });
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -17,14 +26,17 @@ export default function AdminDashboardClient() {
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
               <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-primary">Admin Dashboard</span>
+              <span className="text-sm font-medium text-primary">
+                Admin Dashboard
+              </span>
             </div>
             <div>
               <h1 className="text-4xl font-bold mb-2">
                 Welcome back, {user?.firstName || "Admin"}!
               </h1>
               <p className="text-muted-foreground">
-                Manage doctors, oversee appointments, and monitor your dental practice performance.
+                Manage doctors, oversee appointments, and monitor your dental
+                practice performance.
               </p>
             </div>
           </div>

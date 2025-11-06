@@ -9,6 +9,14 @@ import { useGetDoctors } from "@/hooks/use-doctors";
 import { useUser } from "@clerk/nextjs";
 import { SettingsIcon } from "lucide-react";
 
+
+
+
+
+
+
+
+
 export default function AdminDashboardClient() {
   const { user } = useUser();
   const { data: doctors = [], isLoading } = useGetDoctors(); /*tanstack hook*/

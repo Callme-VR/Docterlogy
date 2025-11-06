@@ -85,7 +85,7 @@ export default function Doctormanagement() {
                       </div>
                       <div className="flex items-center gap-1 text-xs text-muted-foreground">
                         <PhoneIcon className="h-3 w-3" />
-                        {doctor.phone}
+                        {doctor.}
                       </div>
                     </div>
                   </div>

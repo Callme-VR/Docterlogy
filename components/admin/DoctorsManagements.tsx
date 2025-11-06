@@ -19,6 +19,7 @@ import {
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
+import AddDoctorDialog from "./AddDoctorDialog";
 // import AddDoctorDialog from "./AddDoctorDialog";
 
 export default function Doctormanagement() {
@@ -85,7 +86,7 @@ export default function Doctormanagement() {
                       </div>
                       <div className="flex items-center gap-1 text-xs text-muted-foreground">
                         <PhoneIcon className="h-3 w-3" />
-                        {doctor.}
+                        {doctor.phone}
                       </div>
                     </div>
                   </div>
@@ -117,7 +118,7 @@ export default function Doctormanagement() {
                     <EditIcon className="size-4 mr-1" />
                     Edit
                   </Button>
-                </div>
+              </div>
               </div>
             ))}
           </div>

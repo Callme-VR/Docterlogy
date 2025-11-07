@@ -1,7 +1,7 @@
 "use client"
 
 import { createDoctor, getDoctors } from "@/lib/actions/doctors";
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 export function useGetDoctors(){
     const result=useQuery({
@@ -13,11 +13,21 @@ export function useGetDoctors(){
     return result;
 }
 
+
+/**
+ * useCreateDoctor is a hook that creates a doctor
+ * @returns {object} result of useMutation
+ */
+
 export function useCreateDoctor(){
+    const queryClient=useQueryClient()
+
     const result = useMutation({
         mutationFn:createDoctor,
-        onSuccess:()=>console.log("Doctor created successfully"),
-        onError:()=>console.log("Error creating doctor")
+        onSuccess:()=>{
+            queryClient.invalidateQueries({queryKey:["getDoctors"]})
+        },
+        onError:()=>console.log("Error creating doctor"),
     })
     return result
 }

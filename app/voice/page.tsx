@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import { FeatureCard } from "@/components/voice/FeatureCard";
+import  FeatureCard  from "@/components/voice/FeatureCard";
 import ProPlanRequired from "@/components/voice/ProPlanRequired";
 import WelcomeSection from "@/components/voice/WelcomeSection";
 import { auth } from "@clerk/nextjs/server";

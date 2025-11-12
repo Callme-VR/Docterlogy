@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import  FeatureCard  from "@/components/voice/FeatureCard";
 import ProPlanRequired from "@/components/voice/ProPlanRequired";
+import VapiWidget from "@/components/voice/VapiWidget";
 import WelcomeSection from "@/components/voice/WelcomeSection";
 import { auth } from "@clerk/nextjs/server";
 
@@ -20,6 +21,7 @@ export default async function Voice() {
                 <FeatureCard />
 
             </div>
+            <VapiWidget />
         </div>
     )
 }

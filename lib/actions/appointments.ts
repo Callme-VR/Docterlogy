@@ -1,6 +1,17 @@
 import { auth } from "@clerk/nextjs/server";
 import { prisma } from "../prisma";
 
+function transformAppointments(appointment: any) {
+  return {
+    ...appointment,
+    patientName: `${appointment.user.firstName} ${appointment.user.lastName}`,
+    patientEmail: appointment.user.email,
+    doctorName: appointment.doctor.name,
+    doctorImage: appointment.doctor.imageUrl,
+    date: appointment.date.toISOString().split("T")[0],
+  };
+}
+
 export async function getAppointments() {
   try {
     const appointments = await prisma.appointment.findMany({
@@ -24,24 +35,56 @@ export async function getAppointments() {
   }
 }
 
-// for get user appointments 
 export async function getUserAppointments() {
+  try {
+    const { userId } = await auth();
+    if (!userId) throw new Error("Unauthorized");
+    // find user by clerkid from authenticated session
+    const user = await prisma.user.findUnique({
+      where: { clerkId: userId },
+    });
+    if (!user) throw new Error("User not found");
+
+    const appointments = await prisma.appointment.findMany({
+      where: { userId: user.id },
+      include: {
+        user: {
+          select: {
+            firstName: true,
+            lastName: true,
+            email: true,
+          },
+        },
+        doctor: { select: { name: true, imageUrl: true } },
+      },
+      orderBy: { createdAt: "asc" },
+    });
+
+    return appointments.map(transformAppointments);
+  } catch (error) {
+    console.error("Error fetching user appointments", error);
+    throw new Error("Failed to fetch user appointments");
+  }
+}
+
+// for get user appointments count
+export async function getUserAppointmentstats() {
   try {
     const { userId } = await auth();
     if (!userId) throw new Error("Unauthorized");
 
     const user = await prisma.user.findUnique({
-      where: { clerkId: userId }
+      where: { clerkId: userId },
     });
 
     if (!user) throw new Error("User not found");
 
     const [totalCount, completedCount] = await Promise.all([
       prisma.appointment.count({
-        where: { userId: user.id }
+        where: { userId: user.id },
       }),
       prisma.appointment.count({
-        where: { userId: user.id, status: "CONFIRMED" }
+        where: { userId: user.id, status: "CONFIRMED" },
       }),
     ]);
 

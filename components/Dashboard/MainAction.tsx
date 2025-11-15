@@ -14,7 +14,7 @@ export default function MainAction() {
                 <CardContent className="relative  p-8">
                     <div className="flex items-center gap-5 mb-6">
                         {/* this div for the icon  */}
-                        <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <div className="w-16 h-16 bg-linear-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                             <Image src="/audio.png" alt="Voice AI" width={32} height={32} className="w-10" />
                         </div>
 
@@ -51,7 +51,7 @@ export default function MainAction() {
 
                     {/* this div for the Buttons components */}
                     <Link href={"/voice"} className={buttonVariants({
-                        variant: "default", className: "w-full mt-6 bg-gradient-to-r from-primary to-primary/90 text-white hover:from-primary/80 hover:to-primary/90 font-medium py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                        variant: "default", className: "w-full mt-6 bg-linear-to-r from-primary to-primary/90 text-white hover:from-primary/80 hover:to-primary/90 font-medium py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                     })} >
                         <MessageSquareIcon className="mr-2 h-4 w-4" />
                         Get Started
@@ -66,7 +66,7 @@ export default function MainAction() {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <CardContent className="relative p-8">
                     <div className="flex items-center gap-4 mb-6">
-                        <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <div className="w-16 h-16 bg-linear-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                             <Image src="/calendar.png" alt="Calendar" width={32} height={32} className="w-10" />
                         </div>
                         <div>

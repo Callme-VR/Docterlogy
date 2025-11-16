@@ -1,3 +1,5 @@
+"use server";
+
 import { auth } from "@clerk/nextjs/server";
 import { prisma } from "../prisma";
 
@@ -147,7 +149,7 @@ export async function Bookappointmentconfirm(input: BookAppointmentInput) {
       data: {
         userId: user.id,
         doctorId: input.doctorId,
-        date: input.date,
+        date: new Date(input.date),
         time: input.time,
         reason: input.reason,
         status: "CONFIRMED",

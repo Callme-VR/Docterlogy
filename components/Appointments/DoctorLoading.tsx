@@ -1,7 +1,10 @@
+/** 
+ * Loading skeleton components for doctor cards
+ */
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 
-function DoctorCardSkeleton() {
+function DoctorCardSkeleton({ uniqueKey }: { uniqueKey: string }) {
     return (
         <Card className="cursor-pointer transition-all hover:shadow-lg">
             <CardHeader className="pb-4">
@@ -36,11 +39,15 @@ function DoctorCardSkeleton() {
 }
 
 export default function DoctorLoading() {
+    // Create individual skeleton components with unique keys to avoid index-based keys
     return (
         <div className="grid md:grid-cols-2 gap-6 lg:grid-cols-3">
-            {Array.from({ length: 6 }).map((_, index) => (
-                <DoctorCardSkeleton key={`doctor-skeleton-${index}`} />
-            ))}
+            <DoctorCardSkeleton uniqueKey="skeleton-1" />
+            <DoctorCardSkeleton uniqueKey="skeleton-2" />
+            <DoctorCardSkeleton uniqueKey="skeleton-3" />
+            <DoctorCardSkeleton uniqueKey="skeleton-4" />
+            <DoctorCardSkeleton uniqueKey="skeleton-5" />
+            <DoctorCardSkeleton uniqueKey="skeleton-6" />
         </div>
     );
 }

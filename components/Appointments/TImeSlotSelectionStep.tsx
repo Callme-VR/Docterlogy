@@ -147,7 +147,7 @@ function TimeSelectionStep({
       {/* continue button (only show when all selections are made) */}
       {selectedType && selectedDate && selectedTime && (
         <div className="flex justify-end">
-          <Button onClick={onContinue}>Review Booking</Button>
+          <Button onClick={onContinue}>Continue to Schedule</Button>
         </div>
       )}
     </div>

@@ -1,0 +1,248 @@
+
+import BookConfirmationStep from "@/components/Appointments/BookConfirmationStep ";
+import DoctorSelectionStep from "@/components/Appointments/DoctorSelectionStep";
+import ProgessSteps from "@/components/Appointments/ProgessSteps";
+import TimeSelectionStep from "@/components/Appointments/TImeSlotSelectionStep";
+import Navbar from "@/components/Navbar";
+import { Progress } from "@/components/ui/progress";
+import { useBookAppointment, UserSpecificAppointments } from "@/hooks/use-appointments";
+import { APPOINTMENT_TYPES } from "@/lib/utils";
+import { format } from "date-fns";
+import { useState } from "react";
+import { toast } from "sonner";
+
+interface BookedAppointment {
+  id: string;
+  doctorId: string;
+  date: string;
+  time: string;
+  reason: string;
+  // Add other relevant fields as needed
+}
+
+export default function AppointmentsPage() {
+
+
+    const [selectedDentistId,setSelectedDentistId]=useState<string | null>(null);
+    const [selectedDate,setSelectedDate]=useState("");
+    const [selectedTime,setSelectedTime]=useState("")
+    const [selectedType,setSelectedType]=useState("");
+    const [currentStep,setCurrentStep]=useState(1);
+    const [showConfirmModal,setShowConfirmModal]=useState(false);
+    const [bookedAppointment, setBookedAppointment] = useState<BookedAppointment | null>(null);
+    const BookAppointmentMutation=useBookAppointment();
+
+    const {data:userAppointments=[]}=UserSpecificAppointments();
+
+
+
+
+
+
+    const handleBookAppointment=async()=>{
+        if(!selectedDentistId || !selectedDate || !selectedTime || !selectedType){
+            toast.error("Please select all fields");
+            return;
+        }
+        const appointmentType=APPOINTMENT_TYPES.find((type)=>type.id === selectedType);
+        BookAppointmentMutation.mutate({
+            doctorId:selectedDentistId,
+            date:selectedDate,
+            time:selectedTime,
+            reason:appointmentType?.name,
+        },{
+            onSuccess:async(appointment)=>{
+                setBookedAppointment(appointment);
+
+                // todo send emails using resend
+
+                setShowConfirmModal(true);
+ 
+                // reset form
+                setSelectedDentistId(null);
+                setSelectedDate("");
+                setSelectedTime("");
+                setSelectedType("");
+                setCurrentStep(1);
+            },
+            onError:async(error)=>{
+                toast.error("Failed to book appointment");
+            }
+        })
+    }
+    const handleSelectDentist=(doctorId:string)=>{
+        setSelectedDentistId(doctorId);
+    setSelectedDate("");
+    setSelectedTime("");
+    setSelectedType("");
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    return (
+
+        <>
+        <Navbar />
+
+        {/* for the main header */}
+
+        <div className="max-w-7xl mx-auto px-6 py-8 pt-24">
+            {/* header */}
+            <div className="mb-8">
+                <h1 className="text-3xl font-bold  mb-3">
+                    Book an Appointment
+                </h1>
+                <p className="text-muted-foreground">
+                    Choose a doctor and book an appointment in your area
+                </p>
+            </div>
+
+            <ProgessSteps currentStep={currentStep} />
+
+            {currentStep===1 && (
+                <DoctorSelectionStep
+                selectedDentistId={selectedDentistId}
+                onSelectDentist={handleSelectDentist}
+                onContinue={() => setCurrentStep(2)}
+                 />
+            )}
+
+            {currentStep===2 && (
+                <TimeSelectionStep
+                selectedDentistId={selectedDentistId}
+                selectedDate={selectedDate}
+                selectedTime={selectedTime}
+                selectedType={selectedType}
+                onContinue={() => setCurrentStep(3)}
+                onBack={() => setCurrentStep(1)}
+                onDateChange={setSelectedDate}
+                onTimeChange={setSelectedTime}
+                onTypeChange={setSelectedType}
+                 />
+            )}
+            
+            {currentStep===3 && (
+                <BookConfirmationStep
+                selectedDentistId={selectedDentistId}
+                selectedDate={selectedDate}
+                selectedTime={selectedTime}
+                selectedType={selectedType}
+                isBooking={BookAppointmentMutation.isPending}
+                onBack={() => setCurrentStep(2)}
+                onModify={() => setCurrentStep(2)}
+                onConfirm={handleBookAppointment}
+                 />
+            )}
+        </div>
+
+        {/* upcmoing appointment using skelton */}
+        {userAppointments.length > 0 && (
+        <div className="mb-8 max-w-7xl mx-auto px-6 py-8">
+          <h2 className="text-xl font-semibold mb-4">Your Upcoming Appointments</h2>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {userAppointments.map((appointment) => (
+              <div key={appointment.id} className="bg-card border rounded-lg p-4 shadow-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="size-10 bg-primary/10 rounded-full flex items-center justify-center">
+                    <img
+                      src={appointment.doctorImageUrl}
+                      alt={appointment.doctorName}
+                      className="size-10 rounded-full"
+                    />
+                  </div>
+                  <div>
+                    <p className="font-medium text-sm">{appointment.doctorName}</p>
+                    <p className="text-muted-foreground text-xs">{appointment.reason}</p>
+                  </div>
+                </div>
+                <div className="space-y-1 text-sm">
+                  <p className="text-muted-foreground">
+                    📅 {format(new Date(appointment.date), "MMM d, yyyy")}
+                  </p>
+                  <p className="text-muted-foreground">🕐 {appointment.time}</p>
+                </div>
+              </div>
+            ))}
+        </>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {currentStep===3 && selectedDentistId &&(
+            <BookConfirmationStep 
+            selectedDentistId={selectedDentistId}
+            selectedDate={selectedDate}
+            selectedTime={selectedTime}
+            selectedType={selectedType}
+            isBooking={BookAppointmentMutation.isPending}
+            onBack={() => setCurrentStep(2)}
+            onModify={() => setCurrentStep(2)}
+            onConfirm={handleBookAppointment}
+            />
+        )}
+        </>
+    );
+}

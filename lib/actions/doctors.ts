@@ -77,7 +77,7 @@ export async function updateDoctor(input: updateDoctorInput) {
           email: input.email,
         },
       });
-      
+
       if (existingDoctor) {
         throw new Error("Email already exists");
       }
@@ -96,7 +96,7 @@ export async function updateDoctor(input: updateDoctorInput) {
         isActive: input.isActive,
       },
     });
-    
+
     // revalidatePath("/admin");
     return doctor;
   } catch (error: any) {
@@ -106,4 +106,23 @@ export async function updateDoctor(input: updateDoctorInput) {
     }
   }
 }
-  
+
+//
+
+export async function getAvailableDoctors() {
+  try {
+    const doctors = await prisma.doctor.findMany({
+      where: { isActive: true },
+      include: {
+        _count: {
+          select: { appointments: true },
+        },
+      },
+      orderBy: { name: "asc" },
+    });
+    return doctors;
+  } catch (error) {
+    console.error("Error fetching available doctors:", error);
+    throw new Error("Failed to fetch available doctors");
+  }
+}

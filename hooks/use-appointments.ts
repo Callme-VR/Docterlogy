@@ -1,8 +1,13 @@
-
 "use client";
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Bookappointmentconfirm, getAppointments, getBookTimeSlots, getUserAppointments } from "@/lib/actions/appointments";
+import {
+  Bookappointmentconfirm,
+  getAppointments,
+  getBookTimeSlots,
+  getUserAppointments,
+  UpdateAppointmentStatus,
+} from "@/lib/actions/appointments";
 
 export function useGetAppointments() {
   const result = useQuery({
@@ -19,7 +24,6 @@ export function useBookingAppointments(doctorId: string, date: string) {
     enabled: !!doctorId && !!date,
   });
 }
-
 
 export function useBookAppointment() {
   const queryClient = useQueryClient();
@@ -39,4 +43,17 @@ export function UserSpecificAppointments() {
     queryFn: getUserAppointments,
   });
   return result;
+}
+
+export function useUpdateAppointment() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: UpdateAppointmentStatus,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getUserAppointments"] });
+    },
+    onError: (error) =>
+      console.error("Failed to update appointment status:", error),
+  });
 }

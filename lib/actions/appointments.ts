@@ -2,6 +2,7 @@
 
 import { auth } from "@clerk/nextjs/server";
 import { prisma } from "../prisma";
+import { AppointmentStatus } from "@prisma/client";
 
 function transformAppointments(appointment: any) {
   return {
@@ -122,7 +123,6 @@ export async function getBookTimeSlots(doctorId: string, date: string) {
   }
 }
 
-
 interface BookAppointmentInput {
   doctorId: string;
   date: string;
@@ -130,7 +130,6 @@ interface BookAppointmentInput {
   type: string;
   reason: string;
 }
-
 
 export async function Bookappointmentconfirm(input: BookAppointmentInput) {
   try {
@@ -153,7 +152,6 @@ export async function Bookappointmentconfirm(input: BookAppointmentInput) {
         time: input.time,
         reason: input.reason,
         status: "CONFIRMED",
-
       },
       include: {
         user: {
@@ -161,19 +159,39 @@ export async function Bookappointmentconfirm(input: BookAppointmentInput) {
             firstName: true,
             lastName: true,
             email: true,
-          }
+          },
         },
         doctor: {
           select: {
             name: true,
             imageUrl: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
     return transformAppointments(appointment);
   } catch (error) {
     console.error("Error booking appointment", error);
     throw new Error("Failed to book appointment");
+  }
+}
+
+export async function UpdateAppointmentStatus(input: {
+  id: string;
+  status: AppointmentStatus;
+}) {
+  try {
+    const appointment = await prisma.appointment.update({
+      where: {
+        id: input.id,
+      },
+      data: {
+        status: input.status,
+      },
+    });
+    return transformAppointments(appointment);
+  } catch (error) {
+    console.error("Error updating appointment status", error);
+    throw new Error("Failed to update appointment status");
   }
 }

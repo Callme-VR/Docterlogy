@@ -4,6 +4,7 @@
 
 import Adminstats from "@/components/admin/Adminstats";
 import Doctormanagement from "@/components/admin/DoctorsManagements";
+import RecentAppointments from "@/components/admin/RecentAppointments";
 import Navbar from "@/components/Navbar";
 import { useGetAppointments } from "@/hooks/use-appointments";
 import { useGetDoctors } from "@/hooks/use-doctors";
@@ -100,6 +101,10 @@ export default function AdminDashboardClient() {
           completedAppointments={stats.completedAppointments}
         />
         <Doctormanagement />
+
+
+
+        <RecentAppointments />
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { AppointmentConfirmationModal } from "@/components/Appointments/AppointmentConfirmationModal";
 import BookConfirmationStep from "@/components/Appointments/BookConfirmationStep ";
 import DoctorSelectionStep from "@/components/Appointments/DoctorSelectionStep";
 import ProgessSteps from "@/components/Appointments/ProgessSteps";
@@ -20,6 +21,8 @@ interface BookedAppointment {
   date: string;
   time: string;
   reason: string;
+  doctorName: string;
+  userEmail: string;
   // Add other relevant fields as needed
 }
 
@@ -157,6 +160,31 @@ export default function AppointmentsPage() {
           />
         )}
       </div>
+
+
+
+      {/* appointment confirmation modal */}
+
+      {bookedAppointment && (
+        <AppointmentConfirmationModal
+          open={showConfirmModal}
+          onOpenChange={setShowConfirmModal}
+          bookedAppointment={bookedAppointment}
+          appointmentDetails={{
+            doctorName: bookedAppointment.doctorName,
+            appointmentDate: format(new Date(bookedAppointment.date), "MMM d, yyyy"),
+            appointmentTime: bookedAppointment.time,
+            userEmail: bookedAppointment.userEmail,
+          }}
+        />
+      )}
+
+
+
+
+
+
+
 
       {/* upcoming appointments section */}
       {userAppointments.length > 0 && (

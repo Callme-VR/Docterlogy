@@ -38,7 +38,7 @@ function AppointmentConfirmation({
                         <Text style={logoText}>DentWise</Text>
                     </Section>
 
-                    <Heading style={h1}>Appointment Confirmed! 🦷</Heading>
+                    <Heading style={h1}>Appointment Confirmed!</Heading>
 
                     <Text style={text}>Hi there,</Text>
 

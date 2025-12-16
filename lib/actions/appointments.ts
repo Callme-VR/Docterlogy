@@ -7,7 +7,7 @@ function transformAppointments(appointment: any) {
   return {
     ...appointment,
     patientName: `${appointment.user.firstName} ${appointment.user.lastName}`,
-    patientEmail: appointment.user.email,
+    userEmail: appointment.user.email,
     doctorName: appointment.doctor.name,
     doctorImage: appointment.doctor.imageUrl,
     date: appointment.date.toISOString().split("T")[0],

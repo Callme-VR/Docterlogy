@@ -4,6 +4,7 @@ import BookConfirmationStep from "@/components/Appointments/BookConfirmationStep
 import DoctorSelectionStep from "@/components/Appointments/DoctorSelectionStep";
 import ProgessSteps from "@/components/Appointments/ProgessSteps";
 import TimeSelectionStep from "@/components/Appointments/TImeSlotSelectionStep";
+import Navbar from "@/components/Navbar";
 import {
   useBookAppointment,
   UserSpecificAppointments,
@@ -87,6 +88,7 @@ export default function AppointmentsPage() {
       {/* for the main header */}
       <div className="max-w-7xl mx-auto px-6 py-8 pt-24">
         {/* header */}
+        <Navbar />
         <div className="mb-8">
           <h1 className="text-3xl font-bold  mb-3">Book an Appointment</h1>
           <p className="text-muted-foreground">

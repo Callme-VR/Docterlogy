@@ -1,18 +1,13 @@
-"use client";
-
+import { getUserAppointments } from "@/lib/actions/appointments";
 import { Card, CardHeader, CardTitle } from "../ui/card";
 import { CalendarIcon, ClockIcon, UserIcon } from "lucide-react";
 import { format, isAfter, isSameDay, parseISO } from "date-fns";
 import NoNextAppointment from "./NoNextAppointment";
-import { useQuery } from "@tanstack/react-query";
-import { getUserAppointments } from "@/lib/actions/appointments";
 
-export default function NextAppointment() {
-  const { data: appointments } = useQuery({
-    queryKey: ["getUserAppointments"],
-    queryFn: getUserAppointments,
-  });
+export default async function NextAppointment() {
+  const appointments = await getUserAppointments();
   // Filter for upcoming CONFIRMED appointments only (today or future)
+
   const upcomingAppointment =
     appointments?.filter((appointment) => {
       const appointmentDate = parseISO(appointment.date);
@@ -22,16 +17,17 @@ export default function NextAppointment() {
       return isComing && appointment.status === "CONFIRMED";
     }) || [];
 
-  // get next appointment(earliest upcoming one)
-  const nextAppointment = upcomingAppointment[0];
-  if (!nextAppointment) return <NoNextAppointment />;
+  // get next appointment(eralist upcoming one)
 
-  const appointmentDate = parseISO(nextAppointment?.date || "");
+  const NextAppointment = upcomingAppointment[0];
+  if (!NextAppointment) return <NoNextAppointment />;
+
+  const appointmentDate = parseISO(upcomingAppointment[0]?.date || "");
   const formattedDate = format(appointmentDate, "EEE, MMMM d, yyyy");
   const isToday = isSameDay(appointmentDate, new Date());
 
   return (
-    <Card className="border-primary/30 bg-linear-to-br from-primary/10 to-background">
+    <Card className="border-primary/30 bg-gradient-to-br from-primary/10 to-background">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <CalendarIcon className="size-5 text-primary" />
@@ -59,9 +55,9 @@ export default function NextAppointment() {
           </div>
           {/* for appointment detail seen here in this div */}
           <div>
-            <p className="font-medium text-sm">{nextAppointment.doctorName}</p>
+            <p className="font-medium text-sm">{NextAppointment.DoctorName}</p>
             <p className="text-xs text-muted-foreground">
-              {nextAppointment.reason}
+              {NextAppointment.reason}
             </p>
           </div>
           {/* for icons of claneder */}
@@ -86,7 +82,7 @@ export default function NextAppointment() {
               <ClockIcon className="size-4 text-primary" />
             </div>
             <div>
-              <p className="font-medium text-sm">{nextAppointment.time}</p>
+              <p className="font-medium text-sm">{NextAppointment.time}</p>
               <p className="text-xs text-muted-foreground">Local time</p>
             </div>
           </div>

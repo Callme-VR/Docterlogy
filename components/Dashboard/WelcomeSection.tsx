@@ -34,7 +34,7 @@ export default function WelcomeSection() {
       </div>
 
       {/* for the Badge of icon */}
-      <div className="lg:flex hidden items-center size-33 bg-linear-to-br from-primary/30 to-primary/40 rounded-fit">
+      <div className="lg:flex hidden items-center w-20 h-20 bg-gradient-to-br from-primary/30 to-primary/40 rounded-full">
           <Image src="/logo.png" alt="doctor" width={60} height={60} />
         
       </div>

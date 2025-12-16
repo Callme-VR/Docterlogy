@@ -31,7 +31,8 @@ export default function AppointmentsPage() {
   const [selectedType, setSelectedType] = useState("");
   const [currentStep, setCurrentStep] = useState(1);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [bookedAppointment, setBookedAppointment] = useState<any>(null);
+  const [bookedAppointment, setBookedAppointment] =
+    useState<BookedAppointment>();
   const BookAppointmentMutation = useBookAppointment();
 
   const { data: userAppointments = [] } = UserSpecificAppointments();
@@ -57,6 +58,7 @@ export default function AppointmentsPage() {
           setBookedAppointment(appointment);
 
           // todo send emails using resend
+         
 
           setShowConfirmModal(true);
 

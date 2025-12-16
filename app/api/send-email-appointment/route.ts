@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     console.log("RESEND_API_KEY length:", process.env.RESEND_API_KEY?.length);
 
     const { data, error } = await resend.emails.send({
-      from: "Doctrology <onboarding@resend.dev>",
+      from: "Doctrology<onboarding@resend.dev>",
       to: [userEmail],
       subject: "Your appointment is confirmed",
       react: AppointmentConfirmation({

@@ -188,6 +188,21 @@ export async function UpdateAppointmentStatus(input: {
       data: {
         status: input.status,
       },
+      include: {
+        user: {
+          select: {
+            firstName: true,
+            lastName: true,
+            email: true,
+          },
+        },
+        doctor: {
+          select: {
+            name: true,
+            imageUrl: true,
+          },
+        },
+      },
     });
     return transformAppointments(appointment);
   } catch (error) {

@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
         hostname: "img.clerk.com",
       },
     ],
+    unoptimized:true
   },
 };
 

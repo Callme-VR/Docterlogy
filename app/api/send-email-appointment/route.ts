@@ -5,15 +5,27 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    console.log("Received email request body:", body);
+    
     const {
       userEmail,
       doctorName,
       appointmentDate,
       appointmentTime,
       duration,
-      price,
       appointmentType,
+      price,
     } = body;
+
+    console.log("Extracted fields:", {
+      userEmail,
+      doctorName,
+      appointmentDate,
+      appointmentTime,
+      duration,
+      appointmentType,
+      price,
+    });
 
     if (
       !userEmail ||
@@ -24,8 +36,12 @@ export async function POST(request: Request) {
       !price ||
       !appointmentType
     ) {
+      console.error("Missing required fields");
       return new Response("All fields are required", { status: 400 });
     }
+
+    console.log("RESEND_API_KEY exists:", !!process.env.RESEND_API_KEY);
+    console.log("RESEND_API_KEY length:", process.env.RESEND_API_KEY?.length);
 
     const { data, error } = await resend.emails.send({
       from: "Doctrology <onboarding@resend.dev>",

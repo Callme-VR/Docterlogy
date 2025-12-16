@@ -98,6 +98,9 @@ importers:
       '@react-email/components':
         specifier: ^1.0.1
         version: 1.0.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@react-email/render':
+        specifier: ^2.0.0
+        version: 2.0.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@tanstack/react-query':
         specifier: ^5.90.6
         version: 5.90.6(react@19.2.0)
@@ -134,6 +137,9 @@ importers:
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      prettier:
+        specifier: ^3.7.4
+        version: 3.7.4
       prisma:
         specifier: ^6.18.0
         version: 6.18.0(typescript@5.9.3)
@@ -1920,8 +1926,8 @@ packages:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
     engines: {node: ^10 || ^12 || >=14}
 
-  prettier@3.6.2:
-    resolution: {integrity: sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==}
+  prettier@3.7.4:
+    resolution: {integrity: sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -3219,7 +3225,7 @@ snapshots:
   '@react-email/render@2.0.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       html-to-text: 9.0.5
-      prettier: 3.6.2
+      prettier: 3.7.4
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
@@ -3789,7 +3795,7 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  prettier@3.6.2: {}
+  prettier@3.7.4: {}
 
   prisma@6.18.0(typescript@5.9.3):
     dependencies:

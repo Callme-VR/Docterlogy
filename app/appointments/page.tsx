@@ -59,7 +59,31 @@ export default function AppointmentsPage() {
           setBookedAppointment(appointment);
 
           // todo send emails using resend
-         
+          // from the libb/email/route.ts
+          try {
+            const emailResponse = await fetch("/api/send-email-appointment", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                userEmail: appointment.userEmail,
+                doctorName: appointment.doctorName,
+                appointmentDate: format(new Date(appointment.date), "MMM d, yyyy"),
+                appointmentTime: appointment.time,
+                appointmentType: appointmentType?.name || "General Appointment",
+                duration: appointmentType?.duration || "1 hour",
+                price: appointmentType?.price || "$15",
+              })
+            });
+
+            if (!emailResponse.ok) {
+              console.error("Email sending failed:", emailResponse.status);
+            }
+          } catch (emailError) {
+            console.error("Email sending error:", emailError);
+          }
+
 
           setShowConfirmModal(true);
 

@@ -1,15 +1,20 @@
-import { currentUser } from "@clerk/nextjs/server";
+"use client";
+
+import { useUser } from "@clerk/nextjs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { BrainIcon, MessageSquareIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
 import { getUserAppointmentstats } from "@/lib/actions/appointments";
 
-export default async function HealthOverview() {
-
-  const appointmentstats = await getUserAppointmentstats();
-  const user = await currentUser();
+export default function HealthOverview() {
+  const { user } = useUser();
+  const { data: appointmentstats } = useQuery({
+    queryKey: ["getUserAppointmentstats"],
+    queryFn: getUserAppointmentstats,
+  });
 
   return (
     <Card className="lg:col-span-2">
@@ -25,19 +30,19 @@ export default async function HealthOverview() {
         <div className="grid md:grid-cols-3 gap-6">
           <div className="text-center p-4 bg-muted/30 rounded-xl">
             <div className="text-2xl font-bold text-primary mb-1">
-              {appointmentstats.completedAppointments}
+              {appointmentstats?.completedAppointments || 0}
             </div>
             <div className="text-sm text-muted-foreground">Completed Visits</div>
           </div>
           <div className="text-center p-4 bg-muted/30 rounded-xl">
             <div className="text-2xl font-bold text-primary mb-1">
-              {appointmentstats.totalAppointments}
+              {appointmentstats?.totalAppointments || 0}
             </div>
             <div className="text-sm text-muted-foreground">Total Appointments</div>
           </div>
           <div className="text-center p-4 bg-muted/30 rounded-xl">
             <div className="text-2xl font-bold text-primary mb-1">
-              {format(new Date(user?.createdAt!), "MMM yyyy")}
+              {user?.createdAt ? format(new Date(user.createdAt), "MMM yyyy") : "Unknown"}
             </div>
             <div className="text-sm text-muted-foreground">Member Since</div>
           </div>
@@ -45,7 +50,7 @@ export default async function HealthOverview() {
 
         {/* for button and heading and dexciption components*/}
 
-        <div className="mt-6 p-4 bg-gradient-to-r from-primary/10 to-primary/5 rounded-xl border border-primary/20">
+        <div className="mt-6 p-4 bg-linear-to-r from-primary/10 to-primary/5 rounded-xl border border-primary/20">
           <div className="flex items-start gap-3">
             <div className="size-10 bg-primary/20 rounded-lg flex items-center justify-center shrink-0">
               <MessageSquareIcon className="size-5 text-primary" />

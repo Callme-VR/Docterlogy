@@ -1,8 +1,10 @@
-import { currentUser } from "@clerk/nextjs/server";
+"use client";
+
+import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 
-export default async function WelcomeSection() {
-  const user = await currentUser();
+export default function WelcomeSection() {
+  const { user } = useUser();
   return (
     <div className="relative z-10 flex items-center justify-between bg-gradient-to-br from-primary/10 via-primary/5 to-background rounded-3xl p-8 border border-primary/20 mb-12 overflow-hidden">
       {/* for welcome section box upper one */}

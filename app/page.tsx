@@ -12,6 +12,7 @@ import { redirect } from "next/navigation";
 export default async function App() {
   // redirect the user to Dashboard page is the user if try to login
   const user = await currentUser();
+  // best  way of synching the user using webhooks
   await SyncUser();
   if (user) redirect("/dashboard");
   

@@ -100,6 +100,106 @@
 
 ## Architecture
 
+### System Architecture Diagram
+
+```mermaid
+graph TB
+    subgraph "Client Layer"
+        A[Web Browser] --> B[Next.js Frontend]
+        B --> C[React Components]
+        B --> D[Shadcn UI Components]
+    end
+    
+    subgraph "Authentication Layer"
+        E[Clerk Authentication]
+        F[User Management]
+        G[Role-based Access Control]
+    end
+    
+    subgraph "Application Layer"
+        H[Next.js API Routes]
+        I[Server Actions]
+        J[Middleware]
+    end
+    
+    subgraph "Business Logic Layer"
+        K[Appointment Management]
+        L[Doctor Management]
+        M[User Synchronization]
+        N[Email Services]
+    end
+    
+    subgraph "External Services"
+        O[Vapi.ai Voice AI]
+        P[Resend Email Service]
+        Q[Unsplash Images]
+    end
+    
+    subgraph "Data Layer"
+        R[PostgreSQL Database]
+        S[Prisma ORM]
+    end
+    
+    B --> E
+    E --> F
+    F --> G
+    B --> H
+    H --> I
+    I --> J
+    I --> K
+    I --> L
+    I --> M
+    I --> N
+    K --> O
+    N --> P
+    B --> Q
+    K --> S
+    L --> S
+    M --> S
+    S --> R
+    
+    style A fill:#e1f5fe
+    style R fill:#f3e5f5
+    style O fill:#fff3e0
+    style P fill:#fff3e0
+```
+
+### Data Flow Architecture
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant F as Frontend
+    participant A as Auth (Clerk)
+    participant API as API Routes
+    participant DB as Database
+    participant AI as Vapi.ai
+    participant Email as Resend
+    
+    U->>F: Access Application
+    F->>A: Authenticate User
+    A->>F: Return User Info
+    F->>API: Request Data
+    API->>DB: Query/Update
+    DB->>API: Return Data
+    API->>F: Send Response
+    F->>U: Display Results
+    
+    Note over U,Email: Appointment Booking Flow
+    U->>F: Book Appointment
+    F->>API: Create Appointment
+    API->>DB: Save Appointment
+    API->>Email: Send Confirmation
+    Email->>U: Email Notification
+    
+    Note over U,AI: Voice Assistant Flow
+    U->>F: Initiate Voice Chat
+    F->>AI: Connect to Vapi.ai
+    AI->>U: Voice Interaction
+    AI->>F: Return Response
+    F->>U: Display AI Response
+```
+
 ### Project Structure
 ```
 docterlogy/

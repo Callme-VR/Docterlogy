@@ -1,11 +1,11 @@
 # Docterlogy - AI-Powered Healthcare Appointment System
 
 <div align="center">
-  <img src="/public/hero.png" alt="Docterlogy Hero" width="600" />
+  <img src="/hero.png" alt="Docterlogy Hero" width="600" />
 </div>
 
 <p align="center">
-  An advanced healthcare platform featuring AI-powered voice assistance and seamless appointment booking.
+  <strong>An advanced healthcare platform featuring AI-powered voice assistance and seamless appointment booking.</strong>
 </p>
 
 <p align="center">
@@ -13,9 +13,25 @@
   <a href="#tech-stack">Tech Stack</a> •
   <a href="#architecture">Architecture</a> •
   <a href="#getting-started">Getting Started</a> •
+  <a href="#api-documentation">API Documentation</a> •
+  <a href="#testing">Testing</a> •
   <a href="#deployment">Deployment</a> •
-  <a href="#contributing">Contributing</a>
+  <a href="#security">Security</a> •
+  <a href="#contributing">Contributing</a> •
+  <a href="#license">License</a>
 </p>
+
+<div align="center">
+  
+  ![Next.js](https://img.shields.io/badge/Next.js-16.0.10-black?logo=next.js)
+  ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+  ![React](https://img.shields.io/badge/React-19.2.0-blue?logo=react)
+  ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-06B6D4?logo=tailwindcss)
+  ![Prisma](https://img.shields.io/badge/Prisma-6.18.0-black?logo=prisma)
+  ![Clerk](https://img.shields.io/badge/Clerk-6.34.1-purple?logo=clerk)
+  ![License](https://img.shields.io/badge/License-MIT-green)
+
+</div>
 
 ---
 

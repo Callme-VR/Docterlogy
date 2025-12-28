@@ -2,6 +2,12 @@ import ActivityOverview from "@/components/Dashboard/ActivityOverview";
 import MainAction from "@/components/Dashboard/MainAction";
 import WelcomeSection from "@/components/Dashboard/WelcomeSection";
 import Navbar from "@/components/Navbar";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard | DocterLogy",
+  description: "Dashboard",
+};
 
 export default function dashboard() {
   return (

@@ -14,6 +14,12 @@ import { APPOINTMENT_TYPES } from "@/lib/utils";
 import { format } from "date-fns";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Appointments | DocterLogy",
+  description: "Book an appointment with a doctor",
+};
 
 interface BookedAppointment {
   id: string;
@@ -67,17 +73,20 @@ export default function AppointmentsPage() {
             const emailResponse = await fetch("/api/send-email-appointment", {
               method: "POST",
               headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
               },
               body: JSON.stringify({
                 userEmail: appointment.userEmail,
                 doctorName: appointment.doctorName,
-                appointmentDate: format(new Date(appointment.date), "MMM d, yyyy"),
+                appointmentDate: format(
+                  new Date(appointment.date),
+                  "MMM d, yyyy"
+                ),
                 appointmentTime: appointment.time,
                 appointmentType: appointmentType?.name || "General Appointment",
                 duration: appointmentType?.duration || "1 hour",
                 price: appointmentType?.price || "$15",
-              })
+              }),
             });
 
             if (!emailResponse.ok) {
@@ -86,7 +95,6 @@ export default function AppointmentsPage() {
           } catch (emailError) {
             console.error("Email sending error:", emailError);
           }
-
 
           setShowConfirmModal(true);
 
@@ -161,8 +169,6 @@ export default function AppointmentsPage() {
         )}
       </div>
 
-
-
       {/* appointment confirmation modal */}
 
       {bookedAppointment && (
@@ -172,19 +178,15 @@ export default function AppointmentsPage() {
           bookedAppointment={bookedAppointment}
           appointmentDetails={{
             doctorName: bookedAppointment.doctorName,
-            appointmentDate: format(new Date(bookedAppointment.date), "MMM d, yyyy"),
+            appointmentDate: format(
+              new Date(bookedAppointment.date),
+              "MMM d, yyyy"
+            ),
             appointmentTime: bookedAppointment.time,
             userEmail: bookedAppointment.userEmail,
           }}
         />
       )}
-
-
-
-
-
-
-
 
       {/* upcoming appointments section */}
       {userAppointments.length > 0 && (

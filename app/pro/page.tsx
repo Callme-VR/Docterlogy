@@ -3,9 +3,15 @@ import { PricingTable } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import { CrownIcon } from "lucide-react";
 import { redirect } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pro | DocterLogy",
+  description: "Pro",
+};
 
 export default async function Propage() {
-  const user =  currentUser();
+  const user = currentUser();
 
   if (!user) redirect("/");
 
@@ -45,24 +51,18 @@ export default async function Propage() {
           </div>
         </div>
 
-
-
         {/* Pricing section */}
 
         <div className="space-y-10">
           <div className="text-center space-y-4">
             <h2 className="text-3xl font-bold">Choose Your Plan</h2>
             <p className="text-muted-foreground max-2xl mx-auto">
-                Select the perfect plan to elevate your health care experience
+              Select the perfect plan to elevate your health care experience
             </p>
           </div>
         </div>
 
-        <PricingTable/>
-
-
-
-
+        <PricingTable />
       </div>
     </>
   );
